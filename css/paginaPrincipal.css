@@ -1,0 +1,190 @@
+.header {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    padding: 10px 20px;
+    height: 10rem;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+}
+
+.titulo span{
+    font-size: 3rem;
+}
+
+.tituloPrincipal {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-left: 10px;
+}
+
+.opciones {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#barraBusqueda {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 200px;
+    font-size: 1rem;
+}
+
+.material-symbols-outlined {
+    font-size: 30px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/* Estilos para la ventana modal */
+/* Estilos generales de la modal */
+.modal {
+    display: none; /* Oculta la modal por defecto */
+    position: fixed; /* Posiciona la modal sobre el contenido */
+    z-index: 1000; /* Asegura que la modal esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Agrega scroll si el contenido es grande */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+}
+
+/* Contenedor de la modal */
+.modal-contenido {
+    background-color: #fff;
+    margin: 15% auto; /* Centro vertical y horizontal */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    width: 80%; /* Ancho de la modal */
+    max-width: 600px; /* Ancho máximo de la modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Botón de cerrar */
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Títulos */
+.modal-contenido h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Estilos del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para los labels y inputs */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Botón de enviar */
+button[type="submit"] {
+    background-color: #007BFF; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el cursor */
+}
+
+
+
+
+.task-list {
+    display: grid;
+    gap: 10px;
+}
+
+.task-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #ccc;
+}
+
+.task-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: center;
+    border-bottom: 1px dotted #ccc;
+    padding: 10px 0;
+}
+
+.task-name {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 10rem;
+    font-size: 2rem;
+}
+
+.task-name .material-symbols-outlined {
+    font-size: 24px;
+    color: #6a1b9a; 
+    margin-right: 10px;
+}
+
+.assigned {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.assigned .nombre {
+    font-size: 2rem;
+ 
+}
+
+.due-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.status {
+    background-color: #ff9800;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
