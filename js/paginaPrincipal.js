@@ -1,11 +1,22 @@
-// Obtener los elementos
+let LOCAL_STORAGE_KEY_ASSIGNMENTS = 'lista_tareas';
+
+// Función para guardar asignaciones en localStorage
+function guardarAsignaciones(asignaciones) {
+    localStorage.setItem(LOCAL_STORAGE_KEY_ASSIGNMENTS, JSON.stringify(asignaciones));
+}
+
+// Función para obtener las asignaciones desde localStorage
+function obtenerAsignaciones() {
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ASSIGNMENTS)) || [];
+}
+
+
 let modal = document.getElementById("miModal");
-let abrirModal = document.querySelector(".opciones .material-symbols-outlined:nth-child(2)"); // El ícono de "add_circle"
+let abrirModal = document.querySelector(".opciones .material-symbols-outlined:nth-child(2)");
 let cerrarModal = document.querySelector(".modal .cerrar");
 let formulario = document.getElementById("formularioTarea");
 let tareaList = document.querySelector(".task-list");
 let nombreUsuarioElement = document.getElementById('nombreUsuario');
-
 
 abrirModal.onclick = function() {
     modal.style.display = "block";
@@ -21,6 +32,63 @@ window.onclick = function(event) {
     }
 }
 
+function eliminarTarea(index) {
+    let asignaciones = obtenerAsignaciones();
+    asignaciones.splice(index, 1);  // Elimina la tarea del array
+    guardarAsignaciones(asignaciones);  // Guarda la nueva lista en localStorage
+    renderizarTareas(asignaciones);  // Vuelve a renderizar las tareas
+}
+
+function renderizarTareas(asignaciones) {
+    tareaList.innerHTML = ''; 
+    asignaciones.forEach((tarea, index) => {
+        let nuevaFila = document.createElement("div");
+        nuevaFila.classList.add("task-row");
+
+        nuevaFila.innerHTML = `
+            <div class="task-name">
+                <span class="material-symbols-outlined">check_circle</span>
+                <span>${tarea.nombreTarea}</span>
+            </div>
+            <div class="assigned">
+                <p class="nombre">${tarea.asignado}</p>
+            </div>
+            <div class="due-date">${tarea.fechaEntrega}</div>
+            <div class="status">${tarea.estado}</div>
+            <button class="eliminar-tarea">Eliminar</button>
+        `;
+
+        let botonEliminar = nuevaFila.querySelector('.eliminar-tarea');
+        botonEliminar.addEventListener('click', function() {
+            eliminarTarea(index);
+        });
+
+        tareaList.appendChild(nuevaFila);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    let asignaciones = obtenerAsignaciones();
+    renderizarTareas(asignaciones);
+
+    let nombreUsuario = localStorage.getItem('nombreUsuario');
+    if (nombreUsuario) {
+        nombreUsuarioElement.textContent = `Hola, ${nombreUsuario}`;
+    } else {
+        nombreUsuarioElement.textContent = 'Invitado';
+    }
+
+    let barraBusqueda = document.getElementById('barraBusqueda');
+    barraBusqueda.addEventListener('input', function() {
+        let terminoBusqueda = barraBusqueda.value.toLowerCase();
+        let tareasFiltradas = asignaciones.filter(tarea => 
+            tarea.nombreTarea.toLowerCase().includes(terminoBusqueda) || 
+            tarea.asignado.toLowerCase().includes(terminoBusqueda) || 
+            tarea.estado.toLowerCase().includes(terminoBusqueda)
+        );
+        renderizarTareas(tareasFiltradas);
+    });
+});
 
 let botonEnviar = formulario.querySelector('button[type="submit"]');
 
@@ -30,35 +98,19 @@ botonEnviar.addEventListener('click', function() {
     let fechaEntrega = document.getElementById("fechaEntrega").value;
     let estado = document.getElementById("estado").value;
 
-    let nuevaFila = document.createElement("div");
-    nuevaFila.classList.add("task-row");
+    let asignaciones = obtenerAsignaciones();
 
-    nuevaFila.innerHTML = `
-        <div class="task-name">
-            <span class="material-symbols-outlined">check_circle</span>
-            <span>${nombreTarea}</span>
-        </div>
-        <div class="assigned">
-            <p class="nombre">${asignado}</p>
-        </div>
-        <div class="due-date">${fechaEntrega}</div>
-        <div class="status">${estado}</div>
-    `;
+    let nuevaTarea = {
+        nombreTarea,
+        asignado,
+        fechaEntrega,
+        estado
+    };
 
-    tareaList.appendChild(nuevaFila);
+    asignaciones = asignaciones.concat(nuevaTarea); 
+    guardarAsignaciones(asignaciones); 
+    renderizarTareas(asignaciones); 
 
-    modal.style.display = "none";
-
-    formulario.reset();
-});
-
-//Lo que valida usuario beta o con cuenta
-document.addEventListener('DOMContentLoaded', () => {
-    let nombreUsuario = localStorage.getItem('nombreUsuario');
-
-    if (nombreUsuario) {
-        nombreUsuarioElement.textContent = `Hola, ${nombreUsuario}`;
-    } else {
-        nombreUsuarioElement.textContent = 'Invitado';
-    }
+    modal.style.display = "none"; 
+    formulario.reset(); 
 });

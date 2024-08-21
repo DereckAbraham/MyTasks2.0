@@ -32,22 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnIniciar) {
         btnIniciar.addEventListener('click', (event) => {
-            let usuario = inputUsuario.value.trim();
-            let password = inputPassword.value.trim();
-
+            let usuario = inputUsuario.value;
+            let password = inputPassword.value;
+    
             let usuarioValido = validarUsuario(usuario, password);
-
+    
             console.log('Usuario:', usuario);
             console.log('Contraseña:', password);
             console.log('Usuario válido:', usuarioValido);
-
+    
             if (usuarioValido) {
                 console.log('Usuario válido, redirigiendo a paginaPrincipal.html');
                 
                 localStorage.setItem('nombreUsuario', usuarioValido.nombreUser);
-                localStorage.setItem('tipoUsuario', 'registrado'); // O cualquier valor que defina si es usuario registrado o beta
-
-                // Utiliza `setTimeout` para dar tiempo a que el navegador complete el almacenamiento
+                localStorage.setItem('tipoUsuario', 'registrado'); 
+    
                 setTimeout(() => {
                     window.location.href = './paginaPrincipal.html';
                 }, 0);
@@ -56,4 +55,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
 });

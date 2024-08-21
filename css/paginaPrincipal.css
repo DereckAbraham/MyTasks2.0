@@ -188,3 +188,83 @@ button[type="submit"]:hover {
     text-align: center;
     font-weight: bold;
 }
+
+footer {
+    background: linear-gradient(45deg, #85beb0, #729e99);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.footer-container div {
+    flex: 1;
+    margin: 15px;
+    min-width: 250px;
+}
+
+.footer-container h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer-container p,
+.footer-container ul,
+.footer-container li {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: 1.6;
+}
+
+.footer-container a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-container a:hover {
+    color: #f4f4f4;
+}
+
+.footer-bottom {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+}
+
+i {
+    margin-right: 10px;
+}
+
+.eliminar-tarea {
+    background-color: #f44336; /* Color rojo para el botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 10rem;
+}
+
+.eliminar-tarea:hover {
+    background-color: #d32f2f; /* Rojo más oscuro al pasar el ratón */
+}
+
+.eliminar-tarea:focus {
+    outline: none;
+}
